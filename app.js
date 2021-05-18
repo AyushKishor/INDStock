@@ -220,6 +220,11 @@ app.post("/productsearch",function(req,res){
 
 
 
-app.listen(3000 || process.env.PORT, function() {
-    console.log("Server started");
-    });
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+ 
+app.listen(port, function() {
+  console.log("Server started succesfully");
+}); 
