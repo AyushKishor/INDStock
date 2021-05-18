@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+  <h1>Register</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Makes POST request to /register route -->
+          <form action="/shop" method="POST">
+            <div class="form-group">
+              <label for="shopName">Shop Name</label>
+              <input type="name" class="form-control" name="shopName">
+            </div>
+            <div class="form-group">
+                <label for="shopAddress">Shop Address</label>
+                <input type="name" class="form-control" name="shopAddress">
+              </div>
+             
+                <select class="selectpicker" data-style="btn-info" name="locality">
+                    <optgroup label="Select Locality">
+                        <option name="" value="0">Select Locality</option>
+                        <option name="table1" value="central">Central Delhi</option>
+                        <option name="table2" value="north">North Delhi</option>
+                        <option name="table3" value="south">South Delhi</option>
+                        <option name="table3" value="east">East Delhi</option>
+                        <option name="table3" value="west">West Delhi</option>
+                    </optgroup>
+                </select>
+                <div class="input-group">
+                  <span class="input-group-text">Products</span>
+                  <textarea class="form-control" aria-label="With textarea" name="products"></textarea>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">Inventory</span>
+                  <textarea class="form-control" aria-label="With textarea" name="stock"></textarea>
+                </div>              
+            <button type="submit" class="btn btn-dark">Register as a Shop</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>

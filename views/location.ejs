@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid">
+  <div class="dropdown">
+    <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select Locality
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/dashboard/central-delhi">Central Delhi</a>
+      <a class="dropdown-item" href="/dashboard/north-delhi">North Delhi</a>
+      <a class="dropdown-item" href="/dashboard/south-delhi">South Delhi</a>
+      <a class="dropdown-item" href="/dashboard/east-delhi">East Delhi</a>
+      <a class="dropdown-item" href="/dashboard/west-delhi">West Delhi</a>
+    </div>
+  </div>
+  <form action="/productsearch" method="POST">
+  <label for="productSearch">Search by Product Name</label>
+  <input type="text" name="productSearch">
+  <input type="submit">
+  </form>
+</div>
+
+  
+
+<%- include('partials/footer') %>

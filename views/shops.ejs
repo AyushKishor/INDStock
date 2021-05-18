@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+
+<%    foundShops.forEach(function(shop){    %>
+        <div class="shop">
+            <p class="shopName"> <%=shop.name%> </p>
+            <p class="shopAddress"> <%=shop.address%> </p>
+            <table>
+                <tr>
+                    <th>Products</th>
+                    <th>Stock</th>
+                </tr>
+                <tbody>
+<%                    var i = 0;    %>
+<%                    for (i=0;i < shop.inventory.products.length; i++){    %>
+                        <tr>
+                            <td><%=shop.inventory.products[i].toLocaleUpperCase()%></td>
+                            <td><%=shop.inventory.stock[i]%></td>
+                        </tr>
+<%                    } %>
+                
+            </tbody>
+        </table>
+        </div>
+<%    })    %>
+
+<a href="/location">Search another Product</a>
+        
+
+<%- include('partials/footer') %>
