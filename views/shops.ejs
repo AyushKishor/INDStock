@@ -1,10 +1,12 @@
 <%- include('partials/header') %>
-
-
+<a href="/location" class="btn btn-dark" id="back-btn">Search another Product</a>
+    <div class="container">
+        <div class="row">
 <%    foundShops.forEach(function(shop){    %>
-        <div class="shop">
+    
+        <div class="col-5 shop">
             <p class="shopName"> <%=shop.name%> </p>
-            <p class="shopAddress"> <%=shop.address%> </p>
+            <p class="shopAddress">Address: <%=shop.address%> </p>
             <table>
                 <tr>
                     <th>Products</th>
@@ -22,9 +24,15 @@
             </tbody>
         </table>
         </div>
-<%    })    %>
+        <div class="col-2">
 
-<a href="/location">Search another Product</a>
+        </div>
+    
+<%    })    %>
+</div>
+
+
+</div>
         
 
 <%- include('partials/footer') %>

@@ -1,9 +1,30 @@
-.shop{
-    border: 2px solid;
-    border-color: black;
-    padding: auto;
-    width: 50%;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif;
 }
 
+.shop{
+    border-size: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
+.shopName{
+    text-align: center;
+}
+
+#back-btn{
+    margin: 5px;
+}
+
+th,td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
 
