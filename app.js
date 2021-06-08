@@ -155,10 +155,10 @@ app.get("/logout",function(req,res){
 
 
 app.post("/register",function(req,res){
-    
+    console.log(req.body.username);
     User.register({username: req.body.username}, req.body.password, function(err, user){
         if(err){
-            console.log(err);
+            console.log(err)
             res.redirect("/register")
         }
         else{

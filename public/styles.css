@@ -4,6 +4,10 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+.logo{
+    width: 128px;
+}
+
 .shop{
     border-size: 2px;
     border-style: solid;
@@ -28,3 +32,13 @@ th,td{
     padding-left: 10px;
 }
 
+.container{
+    margin: auto;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.card-body{
+    margin: auto;
+}
