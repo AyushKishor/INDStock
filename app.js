@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-find-or-create');
 
 //To Avoid Deprecation Warnings
@@ -31,18 +30,23 @@ app.use(session({
 app.use(passport.initialize());  
 app.use(passport.session());
 
+//Connecting Database to Server
 mongoose.connect('mongodb+srv://admin:sanskriti@indstock.pszxu.mongodb.net/kiranaDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
+//Schema for Users
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     googleId: String,
 });
 
+//Schema for Shops
 const shopSchema = new mongoose.Schema({
     name: String,
     address: String,
     locality: String,
+    email: String,
+    password: String,
     inventory: {
         products: Array,
         stock: Array
@@ -53,6 +57,7 @@ const Shop = new mongoose.model("Shop",shopSchema);
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
+shopSchema.plugin(passportLocalMongoose);
 
 const User = new mongoose.model("User",userSchema);
 
@@ -67,35 +72,10 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
  
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/dashboard",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
-
 
 app.get("/",function(req,res){
     res.render("home")
 })
-
-app.get("/auth/google", passport.authenticate('google', {
-    scope: ['profile']
-}));
-
-app.get('/auth/google/dashboard', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect to dashboard.
-    res.redirect('/location');
-});
 
 app.get("/login",function(req,res){
     res.render("login");
@@ -108,8 +88,6 @@ app.get("/register",function(req,res){
 app.get("/login",function(req,res){
     if(req.isAuthenticated()){
         res.render("location");
-        
-        
     }
     else{
         res.redirect("/login");
@@ -153,9 +131,11 @@ app.get("/logout",function(req,res){
     res.redirect("/")
 })
 
+app.get("/shop-dashboard",function(req,res){
+    res.send("Please Login as a Shop");
+})
 
 app.post("/register",function(req,res){
-    console.log(req.body.username);
     User.register({username: req.body.username}, req.body.password, function(err, user){
         if(err){
             console.log(err)
@@ -177,6 +157,8 @@ app.post("/login", passport.authenticate("local"), function(req, res){
 app.post("/shop",function(req,res){
     const shop = new Shop({
         name: req.body.shopName,
+        email: req.body.shopEmail,
+        password: req.body.password,
         address: req.body.shopAddress,
         locality: req.body.locality,
         inventory: {
@@ -198,11 +180,15 @@ app.post("/shop",function(req,res){
     
 })
 
+app.get("/shop-login",function(req,res){
+    res.render("shop-login");
+})
+
+
 app.post("/productsearch",function(req,res){
     const productNeeded = req.body.productSearch.toLocaleLowerCase();
     Shop.find({"inventory.products": productNeeded},function(err, foundShops){
         if(!err){
-            console.log(foundShops);
             if(foundShops.length > 0){
                 res.render("shops",{foundShops:foundShops});
             }
@@ -218,6 +204,32 @@ app.post("/productsearch",function(req,res){
     })
 })
 
+app.post("/shop-login",function(req,res){
+    const shopEmail = req.body.shopEmail;
+    Shop.findOne({email: shopEmail},function(err,foundShop){
+        if(err){
+            res.send("You have not registered as a shop")
+        }
+        else{
+            res.render("shop-dashboard",{foundShop:foundShop})
+        }
+    })
+})
+
+app.post("/update-inventory",function(req,res){
+    const products = req.body.product;
+    const stock = req.body.stock;
+    const id = req.body.id;
+    Shop.findByIdAndUpdate(id,{"inventory.products": products,"inventory.stock": stock},function(err,result){
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.send("Updated your Inventory")
+        }
+    })
+   
+})
 
 
 let port = process.env.PORT;

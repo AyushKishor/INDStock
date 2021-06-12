@@ -1,0 +1,115 @@
+.heading{
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+    padding-left: 25px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    font-size: 5rem;
+    
+}
+
+
+.logo-box{
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+  }
+
+.buttons{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding-left: 100px;
+    
+}
+
+
+.yellow{
+    margin: 50px;
+    font-size: 0.9rem;
+    text-decoration: solid;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(195, 207, 16, 0.88);
+    box-shadow:  0 8px 32px rgba(195, 207, 16, 0.88);
+    transition: 0.4s;
+    color: white;    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: 5px 15px 5px 15px;
+    border-color:rgba(195, 207, 16, 0.88) ;
+    cursor: pointer;
+}
+
+.yellow:hover{
+    transform: translateY(7px);
+    background-color: gold;
+
+}
+
+
+
+.red{
+    margin: 50px;
+    font-size: 0.9rem;
+    text-decoration: solid;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(207, 16, 16, 0.88);
+    box-shadow:  0 8px 32px rgba(207, 16, 16, 0.88);
+    transition: 0.4s;
+    color: white;    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: 5px 15px 5px 15px;
+    border-color:rgba(207, 16, 16, 0.88) ;
+    cursor: pointer;
+}
+
+.red:hover{
+    transform: translateY(7px);
+    background-color: brown;
+
+}
+
+
+.blue{
+    margin: 50px;
+    font-size: 0.9rem;
+    text-decoration: solid;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(29, 16, 207, 0.88);
+    box-shadow:  0 8px 32px rgba(29, 16, 207, 0.88);
+    transition: 0.4s;
+    color: white;    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: 5px 15px 5px 15px;
+    border-color:rgba(29, 16, 207, 0.88) ;
+    cursor: pointer;
+}
+
+.blue:hover{
+    transform: translateY(7px);
+    background-color: blue;
+
+}
+
+.buttons{
+    
+}

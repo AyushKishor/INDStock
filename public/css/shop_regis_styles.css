@@ -1,0 +1,62 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.fa-search{
+  padding-right: 10px;
+}
+
+.submit-btn{
+  margin-top: 10px;
+}
+
+.dropdown-toggle{
+  margin-top: 10px;
+}
+
+
+.btn-warning{
+  padding: 0, 20px, 0, 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login-span{
+  color: royalblue;
+  cursor: pointer;
+}
+
+.lead{
+  font-size: 17px;
+}
+
+.large-input{
+  padding: 40px;
+}
