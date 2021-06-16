@@ -29,6 +29,7 @@
                     <tr>
                         <td><input name="product" autocomplete="off" value=<%=foundShop.inventory.products[i].toLocaleUpperCase()%>></td>
                         <td><input name="stock" type="text" autocomplete="off" value=<%=foundShop.inventory.stock[i]%>></td>
+                        <td><span data-remove>×</span></td>
                     </tr>
 <%                } %>
               <td>
@@ -45,7 +46,10 @@
         </table>
       </editable-table>
       <input name="id" style="opacity: 0;" value=<%=foundShop._id%> >
-    <button type="submit" class="btn btn-lg btn-primary">Update Inventory</button>
+      <div class="container text-center">
+        <button type="submit" class="btn btn-lg btn-primary">Update Inventory</button>
+      </div>
+    
     </form>
 </form>
 </body>
