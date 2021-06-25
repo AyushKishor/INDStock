@@ -1,3 +1,5 @@
+<%- include('partials/header') %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,7 @@
     <title><%=foundShop.name%></title>
 </head>
 <body>
+    <h1><%=foundShop.name%></h1>
     <table>
         <tr>
             <th>Products</th>
@@ -23,5 +26,13 @@
         
     </tbody>
 </table>
+<form action="/shop/<%=foundShop._id%>" method="POST">
+    <input type="text" name="review">
+    <button type="submit">Submit Review</button>
+</form>
+<%    foundShop.reviews.forEach(function(review){   %>
+        <p><%=review.username%> : <%=review.newReview%></p>
+<%    })    %>
+    
 </body>
 </html>

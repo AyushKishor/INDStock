@@ -162,17 +162,23 @@ app.get("/shop/:shopId",function(req,res){
 })
 
 app.post("/register",function(req,res){
-    User.register({username: req.body.username}, req.body.password, function(err, user){
-        if(err){
-            console.log(err)
-            res.redirect("/register")
-        }
-        else{
-            passport.authenticate("local")(req,res,function(){
-                res.redirect("/location")
-            })
-        }
-    })
+    if(req.body.password === req.body.confirmPassword){
+        User.register({username: req.body.username}, req.body.password, function(err, user){
+            if(err){
+                console.log(err)
+                res.redirect("/register")
+            }
+            else{
+                passport.authenticate("local")(req,res,function(){
+                    res.redirect("/location")
+                })
+            }
+        })
+    }
+    else{
+        res.redirect("/register")
+    }
+    
     
 });
 
@@ -255,6 +261,19 @@ app.post("/update-inventory",function(req,res){
    
 })
 
+app.post("/shop/:shopId",function(req,res){
+    const newReview = req.body.review;
+    const username = req.user.username;
+    const shopId = req.params.shopId;
+    Shop.findByIdAndUpdate(shopId,{$push: {reviews: {newReview,username}}},function(err,result){
+        if(!err){
+            res.redirect("/shop/" + shopId)
+        }
+        else{
+            console.log(err)
+        }
+    })
+})
 
 let port = process.env.PORT;
 if (port == null || port == "") {
