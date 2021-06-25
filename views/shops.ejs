@@ -1,36 +1,152 @@
 <%- include('partials/header') %>
 
-<a href="/location" class="btn btn-dark" id="back-btn">Search another Product</a>
-    <div class="container">
-        <div class="row">
-<%    foundShops.forEach(function(shop){    %>
-    
-        <div class="col-md-5 shop">
-            <p class="shopName"> <%=shop.name%> </p>
-            <p class="shopAddress">Address: <%=shop.address%> </p>
-            <table>
-                <tr>
-                    <th>Products</th>
-                    <th>Stock</th>
-                </tr>
-                <tbody>
-<%                    var i = 0;    %>
-<%                    for (i=0;i < shop.inventory.products.length; i++){    %>
-        <tr>
-            <td><%=shop.inventory.products[i].toLocaleUpperCase()%></td>
-            <td><%=shop.inventory.stock[i]%></td>
-        </tr>        
-<%                    } %>
-                
-            </tbody>
-        </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Shops</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!--Title Icon-->
+    <link rel="shortcut icon" href="Logo.png" type="image/x-icon">
+</head>
+<body>
+      <!--Main Navigation-->
+  <header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" target="_blank" >
+          <img src="img/Logo.png" height="35" alt="" loading="lazy"
+            style="margin-top: -3px;" />
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="/location">Search Another Product</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/" rel="nofollow"
+                target="_blank">IND-Stock</a>
+            </li>
+          </ul>
         </div>
-    
-<%    })    %>
-</div>
+      </div>
+    </nav>
+    <!-- Navbar -->
 
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h1 class="mb-3 h2">IND-Stock</h1>
+      <p class="mb-3">Kinaare Kinaare Par</p>
 
-</div>
-        
+      </ul>
+    </div>
+    <!-- Jumbotron -->
+  </header>
+  <!--Main Navigation-->
 
-<%- include('partials/footer') %>
+  <!--Main layout-->
+  <main class="my-4">
+    <div class="container">
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-4"><strong>Shops</strong></h4>
+
+        <!-- <div class="btn-group mb-4" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-primary active">Monthly billing</button>
+          <button type="button" class="btn btn-primary">
+            Annual billign <small>(2 months FREE)</small>
+          </button>
+        </div> -->
+
+        <div class="row">
+
+          <!--Grid column-->
+
+            <!-- Card -->
+<%            foundShops.forEach(function(shop){    %>
+        <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+
+                <div class="card-header bg-white py-3">
+                  <h5 class="mb-0"><%=shop.name%></h5>
+                </div>
+  
+                <div class="card-body">
+                  <table>
+                    <tr>
+                        <th>Products</th>
+                        <th>Stock</th>
+                    </tr>
+                    <tbody>
+    <%                    var i = 0;    %>
+    <%                    for (i=0;i < 2; i++){    %>
+            <tr>
+                <td><%=shop.inventory.products[i].toLocaleUpperCase()%></td>
+                <td><%=shop.inventory.stock[i]%></td>
+            </tr>        
+    <%                    } %>
+                    
+                </tbody>
+            </table>
+                </div>
+  
+                <div class="card-footer bg-white py-3">
+                  <a href="/shop/<%=shop._id%>"><button type="button" class="btn btn-success btn-sm">Get it</button></a>
+                </div>
+  
+              </div>
+              </div>
+<%            })    %>
+        </div> 
+            <!-- Card -->
+
+          
+          <!--Grid column-->
+
+          <!--Grid column-->
+          
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">Sanskriti</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

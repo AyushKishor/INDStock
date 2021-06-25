@@ -50,8 +50,11 @@ const shopSchema = new mongoose.Schema({
     inventory: {
         products: Array,
         stock: Array
-    }
+    },
+    ratings: Array,
+    reviews: Array
 })
+
 
 const Shop = new mongoose.model("Shop",shopSchema);
 
@@ -131,8 +134,31 @@ app.get("/logout",function(req,res){
     res.redirect("/")
 })
 
+app.get("/shop-login",function(req,res){
+    res.render("shop-login");
+})
+
 app.get("/shop-dashboard",function(req,res){
     res.send("Please Login as a Shop");
+})
+
+app.get("/shop/:shopId",function(req,res){
+    if(req.isAuthenticated()){
+        const shopId = req.params.shopId;
+        Shop.findById(shopId,function(err,foundShop){
+            if(!err){
+                res.render("shop-page",{foundShop:foundShop})
+            }
+            else{
+                console.log(err)
+            }
+        })
+    }
+    else{
+        res.redirect("/login")
+    }
+    
+
 })
 
 app.post("/register",function(req,res){
@@ -158,12 +184,12 @@ app.post("/shop",function(req,res){
     const shop = new Shop({
         name: req.body.shopName,
         email: req.body.shopEmail,
-        password: req.body.password,
+        password: req.body.shopPassword,
         address: req.body.shopAddress,
         locality: req.body.locality,
         inventory: {
-            products: req.body.products.toLocaleLowerCase().split(" "),
-            stock: req.body.stock.split(" ")
+            products: req.body.product,
+            stock: req.body.stock
         }
        
     
@@ -180,8 +206,17 @@ app.post("/shop",function(req,res){
     
 })
 
-app.get("/shop-login",function(req,res){
-    res.render("shop-login");
+app.post("/shop-login",function(req,res){
+    Shop.findOne({email: req.body.shopEmail},function(err,foundShop){
+        if(!err){
+            if(req.body.shopPassword === foundShop.password){
+                res.render("shop-dashboard",{foundShop:foundShop})
+            }
+            else{
+                res.redirect("/shop-login")
+            }
+        }
+    })
 })
 
 
@@ -198,23 +233,12 @@ app.post("/productsearch",function(req,res){
             
         }
         else{
-            
-            res.render("404");
+            console.log(err);
+            res.render("404")
         }
     })
 })
 
-app.post("/shop-login",function(req,res){
-    const shopEmail = req.body.shopEmail;
-    Shop.findOne({email: shopEmail},function(err,foundShop){
-        if(err){
-            res.send("You have not registered as a shop")
-        }
-        else{
-            res.render("shop-dashboard",{foundShop:foundShop})
-        }
-    })
-})
 
 app.post("/update-inventory",function(req,res){
     const products = req.body.product;

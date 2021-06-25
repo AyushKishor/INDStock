@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=foundShop.name%></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Products</th>
+            <th>Stock</th>
+        </tr>
+        <tbody>
+<%                    var i = 0;    %>
+<%                    for (i=0;i < foundShop.inventory.products.length; i++){    %>
+<tr>
+    <td><%=foundShop.inventory.products[i].toLocaleUpperCase()%></td>
+    <td><%=foundShop.inventory.stock[i]%></td>
+</tr>        
+<%                    } %>
+        
+    </tbody>
+</table>
+</body>
+</html>
