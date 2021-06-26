@@ -1,5 +1,4 @@
 body{
-    background-image: url("Logo.png");
     background-color: #cccccc;;
 }
 
@@ -11,7 +10,8 @@ body{
 .sub-para{
     padding-left: 82px;
     padding-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    text-align: justify;
 }
 
 .container{
@@ -19,6 +19,9 @@ body{
     text-align: center;
 }
 
+.shop-name{
+    font-size: 3.4rem;
+}
 
 .fa-arrow-left{
     padding-right:5px 
@@ -59,4 +62,17 @@ body{
 .back{
     margin-left: 5.5rem;
     margin-bottom: 2rem;
+}
+
+table{
+    margin: 30px auto;
+}
+
+td{
+   padding-left: 50px;
+   padding-right: 50px;
+}
+
+.product{
+    font-size: 2rem;
 }
