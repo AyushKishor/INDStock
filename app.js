@@ -45,6 +45,7 @@ const shopSchema = new mongoose.Schema({
     name: String,
     address: String,
     locality: String,
+    contact: String,
     email: String,
     password: String,
     inventory: {
@@ -190,6 +191,7 @@ app.post("/shop",function(req,res){
     const shop = new Shop({
         name: req.body.shopName,
         email: req.body.shopEmail,
+        contact : req.body.shopNumber,
         password: req.body.shopPassword,
         address: req.body.shopAddress,
         locality: req.body.locality,

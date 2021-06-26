@@ -1,0 +1,62 @@
+body{
+    background-image: url("Logo.png");
+    background-color: #cccccc;;
+}
+
+
+.sub-head{
+    padding-left: 82px;
+}
+
+.sub-para{
+    padding-left: 82px;
+    padding-top: 10px;
+    margin-bottom: 50px;
+}
+
+.container{
+    font-size: 2rem;
+    text-align: center;
+}
+
+
+.fa-arrow-left{
+    padding-right:5px 
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  margin-left: 440px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-signin input[type="text"] {
+    /*margin-bottom: 10px;*/
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 20px;
+  }
+
+.btn{
+    margin-bottom: 25spx;
+}
+
+.submit-btn{
+    margin-top: 10px;
+}
+
+.row{
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.col-lg{
+    margin: 10px;
+}
+
+.back{
+    margin-left: 5.5rem;
+    margin-bottom: 2rem;
+}
