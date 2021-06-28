@@ -148,22 +148,7 @@ app.get("/shop/:shopId",function(req,res){
         const shopId = req.params.shopId;
         Shop.findById(shopId,function(err,foundShop){
             if(!err){
-                var today = new Date();
-                var dd = String(today.getDate()).padStart(2, '0');
-                var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-                var yyyy = today.getFullYear();
-                var searchDate = dd + "/" + mm + "/" + yyyy;
-                Shop.updateOne({_id: shopId},{$push: {search: {user: req.user, time: searchDate }}},function(err,result){
-                    if(!err){
-                        console.log("Search Added")
-                        console.log(result);
-                    }
-                    else{
-                        console.log(err);
-                    }
-                })
                 res.render("shop-page",{foundShop:foundShop})
-                
             }
             else{
                 console.log(err)
@@ -205,7 +190,6 @@ app.post("/login", passport.authenticate("local"), function(req, res){
 app.post("/shop",function(req,res){
     const productsArray = req.body.product
     const lowerCaseArray = productsArray.map(product => product.toLocaleLowerCase())
-    console.log(lowerCaseArray)
     const shop = new Shop({
         name: req.body.shopName,
         email: req.body.shopEmail,
@@ -251,6 +235,23 @@ app.post("/productsearch",function(req,res){
     Shop.find({"inventory.products": productNeeded},function(err, foundShops){
         if(!err){
             if(foundShops.length > 0){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                var yyyy = today.getFullYear();
+                var searchDate = dd + "/" + mm + "/" + yyyy;
+                for (var i = 0; i < foundShops.length; i++){
+                    Shop.updateOne({_id: foundShops[i].id},{$push: {search: {user: req.user, time: searchDate, product: productNeeded }}},function(err,result){
+                        if(!err){
+                            console.log("Search Added")
+                            console.log(result);
+                        }
+                        else{
+                            console.log(err);
+                        }
+                    })
+                }
+                
                 res.render("shops",{foundShops:foundShops});
             }
             else{
