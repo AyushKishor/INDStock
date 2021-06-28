@@ -52,7 +52,7 @@ const shopSchema = new mongoose.Schema({
         products: Array,
         stock: Array
     },
-    ratings: Array,
+    search: Array,
     reviews: Array
 })
 
@@ -148,7 +148,22 @@ app.get("/shop/:shopId",function(req,res){
         const shopId = req.params.shopId;
         Shop.findById(shopId,function(err,foundShop){
             if(!err){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                var yyyy = today.getFullYear();
+                var searchDate = dd + "/" + mm + "/" + yyyy;
+                Shop.updateOne({_id: shopId},{$push: {search: {user: req.user, time: searchDate }}},function(err,result){
+                    if(!err){
+                        console.log("Search Added")
+                        console.log(result);
+                    }
+                    else{
+                        console.log(err);
+                    }
+                })
                 res.render("shop-page",{foundShop:foundShop})
+                
             }
             else{
                 console.log(err)
@@ -188,6 +203,9 @@ app.post("/login", passport.authenticate("local"), function(req, res){
 });
 
 app.post("/shop",function(req,res){
+    const productsArray = req.body.product
+    const lowerCaseArray = productsArray.map(product => product.toLocaleLowerCase())
+    console.log(lowerCaseArray)
     const shop = new Shop({
         name: req.body.shopName,
         email: req.body.shopEmail,
@@ -196,7 +214,7 @@ app.post("/shop",function(req,res){
         address: req.body.shopAddress,
         locality: req.body.locality,
         inventory: {
-            products: req.body.product,
+            products: lowerCaseArray,
             stock: req.body.stock
         }
        
@@ -264,11 +282,13 @@ app.post("/update-inventory",function(req,res){
 })
 
 app.post("/shop/:shopId",function(req,res){
+    console.log("Review Submitted")
     const newReview = req.body.review;
     const username = req.user.username;
     const shopId = req.params.shopId;
     Shop.findByIdAndUpdate(shopId,{$push: {reviews: {newReview,username}}},function(err,result){
         if(!err){
+
             res.redirect("/shop/" + shopId)
         }
         else{

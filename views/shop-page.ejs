@@ -49,16 +49,19 @@
           
          <h1 class="display-4 sub-head">Reviews</h1>
          <div class="form-signin">
-            <form action="/shop/<%=foundShop._id%>" method="POST">
+          <form action="/shop/<%=foundShop._id%>" method="POST">
           <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Type something here" name="review">
           <button class="w-50 btn btn-sm btn-primary submit-btn" type="submit">Submit</button>
         </form>
           </div>
          </div>
-<%            foundShop.reviews.forEach(function(review){       %>
-                <p class="lead sub-para"> <i class="fas fa-user fa-sm"></i>  <%=review.username%> : <%=review.newReview%></p>
+<%         if(foundShop.reviews != "" || foundShop.reviews != null){  %>
+          <%            foundShop.reviews.forEach(function(review){       %>
+            <p class="lead sub-para"> <i class="fas fa-user fa-sm"></i>  <%=review.username%> : <%=review.newReview%></p>
 <%            })        %>
+<%         }  %>
+
           
     </main>
 
