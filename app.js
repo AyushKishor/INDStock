@@ -53,7 +53,8 @@ const shopSchema = new mongoose.Schema({
         stock: Array
     },
     search: Array,
-    reviews: Array
+    reviews: Array,
+    visits: Array
 })
 
 
@@ -148,6 +149,19 @@ app.get("/shop/:shopId",function(req,res){
         const shopId = req.params.shopId;
         Shop.findById(shopId,function(err,foundShop){
             if(!err){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                var yyyy = today.getFullYear();
+                var visitDate = dd + "/" + mm + "/" + yyyy;
+                Shop.updateOne({_id: foundShop.id},{$push: {visits: {date: visitDate }}},function(err,result){
+                    if(!err){
+                        console.log("Page Visited")
+                    }
+                    else{
+                        console.log(err)
+                    }
+                })
                 res.render("shop-page",{foundShop:foundShop})
             }
             else{
@@ -170,8 +184,9 @@ app.post("/register",function(req,res){
                 res.redirect("/register")
             }
             else{
+                const state = "register"
                 passport.authenticate("local")(req,res,function(){
-                    res.redirect("/location")
+                    res.render("location",{state:state})
                 })
             }
         })
@@ -184,7 +199,8 @@ app.post("/register",function(req,res){
 });
 
 app.post("/login", passport.authenticate("local"), function(req, res){
-    res.redirect("/location");
+    const state = "login"
+    res.render("location",{state: state});
 });
 
 app.post("/shop",function(req,res){

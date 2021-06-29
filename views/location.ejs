@@ -52,6 +52,10 @@
   <body class="text-center">
     
 <main class="form-signin">
+<%  if(state === "register"){ %>
+    <h1 class="h5 mb-3 fw-normal">Registered succesfully</h1>
+<%  } %>
+  
   <form action="/productsearch" method="POST">
     <img class="mb-1" src= "Logo.png" alt="" width="176" height="169">
     <h1 class="display">IND-Stock</h1>
