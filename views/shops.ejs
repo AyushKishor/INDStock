@@ -111,8 +111,8 @@
     <%                    var i = 0;    %>
     <%                    for (i=0;i < 2; i++){    %>
             <tr>
-                <td><%=shop.inventory.products[i].toLocaleUpperCase()%></td>
-                <td><%=shop.inventory.stock[i]%></td>
+                <td><%=shop.inventory[i].product.toLocaleUpperCase()%></td>
+                <td><%=shop.inventory[i].stock%></td>
             </tr>        
     <%                    } %>
                     

@@ -36,10 +36,10 @@
             </tr>
             <tbody>
         <%                    var i = 0;    %>
-        <%                    for (i=0;i < foundShop.inventory.products.length; i++){    %>
+        <%                    for (i=0;i < foundShop.inventory.length; i++){    %>
         <tr>
-        <td class="product"><%=foundShop.inventory.products[i].toLocaleUpperCase()%></td>
-        <td class="stock"><%=foundShop.inventory.stock[i]%></td>
+        <td class="product"><%=foundShop.inventory[i].product.toLocaleUpperCase()%></td>
+        <td class="stock"><%=foundShop.inventory[i].stock%></td>
         </tr>        
         <%                    } %>
             

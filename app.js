@@ -49,10 +49,7 @@ const shopSchema = new mongoose.Schema({
     email: String,
     password: String,
     crn: String,
-    inventory: {
-        products: Array,
-        stock: Array
-    },
+    inventory: Array,
     search: Array,
     reviews: Array,
     visits: Array
@@ -205,8 +202,13 @@ app.post("/login", passport.authenticate("local"), function(req, res){
 });
 
 app.post("/shop",function(req,res){
+    const stockArray = req.body.stock;
     const productsArray = req.body.product
     const lowerCaseArray = productsArray.map(product => product.toLocaleLowerCase())
+    const inventoryArray = []
+    for (var i = 0; i < lowerCaseArray.length; i++){
+        inventoryArray.push({product: lowerCaseArray[i], stock: stockArray[i]})
+    }
     const shop = new Shop({
         name: req.body.shopName,
         email: req.body.shopEmail,
@@ -215,11 +217,7 @@ app.post("/shop",function(req,res){
         address: req.body.shopAddress,
         locality: req.body.locality,
         crn: req.body.shopCRN,
-        inventory: {
-            products: lowerCaseArray,
-            stock: req.body.stock
-        }
-       
+        inventory: inventoryArray
     
     });
     shop.save(function(err){
@@ -229,6 +227,7 @@ app.post("/shop",function(req,res){
         }
         else{
             res.send("You have succesfully registered");
+            console.log(shop)
         }
     })
     
@@ -288,8 +287,12 @@ app.post("/productsearch",function(req,res){
 app.post("/update-inventory",function(req,res){
     const products = req.body.product;
     const stock = req.body.stock;
+    const inventory = []
+    for (var i = 0; i < products.length; i++){
+        inventory.push({product: products[i], stock: stock[i]})
+    }
     const id = req.body.id;
-    Shop.findByIdAndUpdate(id,{"inventory.products": products,"inventory.stock": stock},function(err,result){
+    Shop.findByIdAndUpdate(id,{"inventory": inventory},function(err,result){
         if(err){
             console.log(err)
         }

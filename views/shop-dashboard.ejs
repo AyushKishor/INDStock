@@ -26,10 +26,10 @@
           <tbody>
             <tr>
 <%                    var i = 0;    %>
-<%              for (i=0;i < foundShop.inventory.products.length; i++){  %>
+<%              for (i=0;i < foundShop.inventory.length; i++){  %>
                     <tr>
-                        <td><input name="product" autocomplete="off" value=<%=foundShop.inventory.products[i].toLocaleUpperCase()%>></td>
-                        <td><input name="stock" type="text" autocomplete="off" value=<%=foundShop.inventory.stock[i]%>></td>
+                        <td><input name="product" autocomplete="off" value=<%=foundShop.inventory[i].product.toLocaleUpperCase()%>></td>
+                        <td><input name="stock" type="text" autocomplete="off" value=<%=foundShop.inventory[i].stock%>></td>
                         <td><span data-remove>×</span></td>
                     </tr>
 <%                } %>
